@@ -1,0 +1,15 @@
+resources:
+  - ../base
+
+commonLabels:
+  #app: myapp
+  
+
+generatorOptions:
+ disableNameSuffixHash: true
+# Generate a ConfigMap based on the environment variables in the file `.env`.
+configMapGenerator:
+  - name: test-cm
+    envs:
+      -
+        .env

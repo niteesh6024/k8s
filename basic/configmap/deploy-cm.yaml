@@ -1,0 +1,27 @@
+#we can't update the env value after the container was created
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment-cm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: nginx
+        env:
+        - name: ENV_FROM_CONFIGMAP_FILE
+          valueFrom: 
+            configMapKeyRef:
+              name: configmap-file
+              key: env-config-file
+        ports:
+        - containerPort: 80

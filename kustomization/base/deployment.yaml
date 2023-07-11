@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  labels:
+    k8s-app: test
+  name: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      environment: production
+      
+      
+  template:
+    metadata:
+      labels:
+        environment: production
+
+    spec:
+      containers:
+        - name: test
+          image: nginx
+          imagePullPolicy: IfNotPresent  
+          envFrom:
+            - configMapRef:
+                name: test-cm
+
+
+          ports:
+            - containerPort: 90
+              protocol: TCP

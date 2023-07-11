@@ -1,0 +1,28 @@
+#we can update the env value even after the container was created and running
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment-vm-cm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: nginx
+        volumeMounts:
+          - name: cm-vm
+            mountPath: /opt
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: cm-vm
+          configMap:
+            name: configmap-vm

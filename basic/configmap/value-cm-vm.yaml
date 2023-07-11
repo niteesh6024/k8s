@@ -1,0 +1,9 @@
+#using volumemounts this will create a file named as env-config-file and stores the value os niteesh
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-vm
+data:
+  value1-from-volume: Niteesh
+  value2-from-volume: satya
+  value3-from-volume: sai
